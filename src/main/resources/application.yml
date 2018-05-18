@@ -1,21 +1,33 @@
-
 server:
   port: 8080
 spring:
   datasource:
     name: test
-    url: jdbc:mysql://127.0.0.1:3306/helloworld
-    username: lifan
-    password: lifan
-    # ʹ��druid����Դ
+    url: jdbc:mysql://127.0.0.1:3306/seckill?useSSL=false&useUnicode=true&charactorEncoding=utf8
+    username: root
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    pool:
+      max-active: 8   # 连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 8     # 连接池中的最大空闲连接
+      min-idle: 0     # 连接池中的最小空闲连接
+    timeout: 0
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.ssm.ck.model
-
-#pagehelper��ҳ���
+  configuration:
+    map-underscore-to-camel-case: true    # 转成驼峰是命名
+    use-column-label: true
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 pagehelper:
     helperDialect: mysql
     reasonable: true

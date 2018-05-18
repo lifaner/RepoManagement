@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.ck.dao.SeckillDao">
+    <update id="reduceNumber" >
+        update seckill.seckill
+        set number = number -1
+        where number > 0
+              and seckill_id = #{seckill_id}
+              and start_time <![CDATA[ <= ]]> #{create_time}
+              and end_time >= #{create_time}
+    </update>
+
+    <select id="getSeckillById" resultType="Seckill">
+        select
+        s.seckill_id,
+        s.name,
+        s.number,
+        s.start_time,
+        s.end_time,
+        s.create_time
+        from seckill s
+        where s.seckill_id = #{id}
+    </select>
+</mapper>
